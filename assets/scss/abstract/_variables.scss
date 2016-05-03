@@ -1,0 +1,90 @@
+// ==========================================================================
+// # VARIABLES FILE.
+//
+// This should contain all variables used in the project. If there’re any
+// colours, random numbers, etc elsewhere, you’re probably doin’ it wrong =)
+// ==========================================================================
+$px-in-rem: 16;
+
+// ==========================================================================
+// # COLOURS
+//
+// These can be accessed using the palette() function
+// ==========================================================================
+$colorPalette: (
+
+);
+
+
+// ==========================================================================
+// # TEXT CONFIGURATION
+// ==========================================================================
+
+// # FONT FAMILIES: for use with ffm() mixin
+// ==========================================================================
+$fontFamilies: (
+    base:   'Helvetica, Arial, sans-serif'
+);
+
+// # FONT SIZES: for use with the fsz() mixin
+// ==========================================================================
+$fontSizes: (
+    base:   ( size: 16, leading: 1.3 )
+);
+
+// # WEIGHTS: for use with fwt() mixin
+// ==========================================================================
+$fontWeights: (
+    normal: normal
+);
+
+
+// ==========================================================================
+// # DIMENSIONS
+//
+// These are scalar ‘magic’ numbers used throughout the site
+// ==========================================================================
+
+// # Base dimensions: note, these should all be in bare px (will be converted
+//   later)
+// ==========================================================================
+$dimensions: (
+    gutter:     20
+);
+
+// ==========================================================================
+// # Grid dimensions: specified per breakpoint (see mq-breakpoints below)
+// ==========================================================================
+$gridCfg: (
+    gutter:  map-get($dimensions, 'gutter'),
+    margin:  map-get($dimensions, 'gutter'),
+    breakpoints: (
+        small: (
+            columns: 2,
+            aliases: (
+                half:   1
+            )
+        ),
+        medium: (
+            columns: 12,
+            aliases: (
+                third:   4,
+                quarter: 3,
+                half:    6
+            )
+        )
+    )
+);
+
+
+// ==========================================================================
+// # BREAKPOINTS
+//
+// Breakpoints are defined using sass-mq. Note: these must be defined in px
+// ==========================================================================
+$mq-breakpoints: (
+    small:   640px,
+    medium:  768px,
+    large:   960px,
+    huge:    1200px
+);

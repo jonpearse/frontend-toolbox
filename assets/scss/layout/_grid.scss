@@ -1,0 +1,55 @@
+// ==========================================================================
+// # BASIC GRID FILE
+// ==========================================================================
+
+// # Main grid class
+// ==========================================================================
+.grid {
+    // grab some basic configuration
+    $_gutter:  map-get($gridCfg, 'gutter');
+    $_margin:  map-get($gridCfg, 'margin');
+
+    // start some styles
+    display:   flex;
+    flex-wrap: wrap;
+
+    // note: negative margin because all columns have +ve margins
+    margin: 0 rem(-#{$_gutter / 2}) rem(-$_margin);
+
+    // # MODIFIERS
+    // ==========================================================================
+    &.-justify { justify-content: space-between; }
+    &.-no-wrap { flex-wrap: nowrap; }
+
+    // # GRID COLUMNS
+    // ==========================================================================
+    &__col {
+
+        // base styles
+        width:         auto;
+        padding-left:  rem(#{$_margin / 2});
+        padding-right: rem(#{$_margin / 2});
+        margin-bottom: rem($_margin);
+
+        // # Basic named variants
+        // ==========================================================================
+        // full-width
+        &.-full {
+            max-width: 100%;
+            flex: 100%;
+        }
+
+        // remaining space
+        &.-remaining {
+            flex: 1;
+        }
+
+        // # per-responsive breakpoint
+        // ==========================================================================
+        @each $break, $cfg in map-get($gridCfg, 'breakpoints')
+        {
+            @include grid-build-at($break, $cfg);
+        }
+
+    }
+}
