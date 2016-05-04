@@ -33,11 +33,15 @@ gulp.task('sass', function()
 	var combined = Combine(
 		gulp.src(paths.sassCompile),
         sassGlob(),
-		sass(),
+        sourcemaps.init(),
+		sass({
+            outputStyle: 'expanded'
+        }),
         postcss([
             require('autoprefixer')({ browsers: [ 'last 2 versions' ]}),
             require('css-mqpacker')
         ]),
+        sourcemaps.write(),
 		gulp.dest(paths.sassOutput),
 		postcss([
             require('postcss-sorting'),
