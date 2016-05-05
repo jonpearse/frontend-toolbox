@@ -4,15 +4,15 @@
 
 /// Generates font-size and line-height properties from a base map of font sizes.
 ///
-/// @param  {string}    $style      the name of the style, loaded from the $fontSizes configuration variable
+/// @param  string    $style      the name of the style, loaded from the $fontSizes configuration variable
 /// @param  [number}    $leading    the leading to use for this case. If left blank, uses whatever is configured
 @mixin fsz( $style, $leading: null )
 {
-	@if map-has-key($fontSizes, $style)
-	{
+    @if map-has-key($font-sizes, $style)
+    {
         // 1. sort a few things out first
         // a. basics
-		$def: map-get($fontSizes, $style);
+        $def: map-get($font-sizes, $style);
         $size: map-get($def, 'size');
 
         // b. if there’s no leading specified, grab it from the definition
@@ -30,21 +30,21 @@
         // 2. output everything
         font-size: rem($size);
         line-height: $leading;
-	}
-	@else
-	{
-		@warn "Trying to use undefined font style #{$style}!";
-	}
+    }
+    @else
+    {
+        @warn "Trying to use undefined font style #{$style}!";
+    }
 }
 
 /// Generates font-family statements from a base map of font-families.
 ///
-/// @param  {string}    $family the name of the family, loaded from the $fontFamilies configuration variable
+/// @param  {string}    $family the name of the family, loaded from the font-families configuration variable
 @mixin ffm( $family )
 {
-    @if map-has-key($fontFamilies, $family)
+    @if map-has-key($font-families, $family)
     {
-        font-family: map-get($fontFamilies, $family);
+        font-family: map-get($font-families, $family);
     }
     @else
     {
@@ -57,12 +57,12 @@
 /// @param  {string} $weight    the weight to use, as defined from $fontWeights configuration variable
 @mixin fwt( $weight )
 {
-    @if map-has-key($fontWeights, $weight)
+    @if map-has-key($font-weights, $weight)
     {
-        font-weight: map-get($fontWeights, $weight);
+        font-weight: map-get($font-weight, $weight);
     }
     @else
     {
-        @warn "Trying to use undefined font family #{$family}";
+        @warn "Trying to use undefined font weight #{$weight}";
     }
 }

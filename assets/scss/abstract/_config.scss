@@ -11,7 +11,7 @@ $px-in-rem: 16;
 //
 // These can be accessed using the palette() function
 // ==========================================================================
-$colorPalette: (
+$palette: (
 
 );
 
@@ -22,19 +22,19 @@ $colorPalette: (
 
 // # FONT FAMILIES: for use with ffm() mixin
 // ==========================================================================
-$fontFamilies: (
-    base:   'Helvetica, Arial, sans-serif'
+$font-families: (
+    base:   "Helvetica, Arial, sans-serif"
 );
 
 // # FONT SIZES: for use with the fsz() mixin
 // ==========================================================================
-$fontSizes: (
+$font-sizes: (
     base:   ( size: 16, leading: 1.3 )
 );
 
 // # WEIGHTS: for use with fwt() mixin
 // ==========================================================================
-$fontWeights: (
+$font-weights: (
     normal: normal
 );
 
@@ -55,7 +55,7 @@ $dimensions: (
 // ==========================================================================
 // # Grid dimensions: specified per breakpoint (see mq-breakpoints below)
 // ==========================================================================
-$gridCfg: (
+$grid-cfg: (
     gutter:  map-get($dimensions, 'gutter'),
     margin:  map-get($dimensions, 'gutter'),
     breakpoints: (

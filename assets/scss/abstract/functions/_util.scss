@@ -15,11 +15,11 @@
 /// the system =)
 ///
 /// @param {string} $color  the colour to retrieve from the palette
-@function palette( $colorPalette )
+@function palette( $color )
 {
-    @if map-has-key($colorPalette, $color)
+    @if map-has-key($palette, $color)
     {
-        @return map-get($colorPalette, $color);
+        @return map-get($palette, $color);
     }
     @else
     {

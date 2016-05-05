@@ -6,8 +6,8 @@
 // ==========================================================================
 .grid {
     // grab some basic configuration
-    $_gutter:  map-get($gridCfg, 'gutter');
-    $_margin:  map-get($gridCfg, 'margin');
+    $_gutter:  map-get($grid-cfg, 'gutter');
+    $_margin:  map-get($grid-cfg, 'margin');
 
     // start some styles
     display:   flex;
@@ -35,8 +35,8 @@
         // ==========================================================================
         // full-width
         &.-full {
-            max-width: 100%;
             flex: 100%;
+            max-width: 100%;
         }
 
         // remaining space
@@ -46,7 +46,7 @@
 
         // # per-responsive breakpoint
         // ==========================================================================
-        @each $break, $cfg in map-get($gridCfg, 'breakpoints')
+        @each $break, $cfg in map-get($grid-cfg, 'breakpoints')
         {
             @include grid-build-at($break, $cfg);
         }
