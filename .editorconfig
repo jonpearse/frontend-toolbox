@@ -15,3 +15,6 @@ trim_trailing_whitespace = true
 # override for package.json + YAML because convention > configuration
 [{package.json,*.yml}]
 indent_size = 2
+
+[*.rb]
+indent_size = 2

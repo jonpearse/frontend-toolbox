@@ -1,0 +1,108 @@
+exclude:
+  - assets/scss/abstract/functions/_cast.scss
+  - assets/scss/vendor/*
+  - assets/scss/base/_reset.scss
+
+plugin_directories: [ '.scss-linters' ]
+
+linters:
+  # match up with .editorconfig
+  Indentation:
+    width: 4
+
+  # disable this because 1TBS is Nasty™
+  ElsePlacement:
+    enabled: false
+
+  SpaceBetweenParens:
+    enabled: false
+
+  # unfortunately, my style is inconsistent between @rule and .selector, so just disable this for now
+  SpaceBeforeBrace:
+    enabled: false
+
+  HexNotation:
+    enabled: false
+
+  StringQuotes:
+    enabled: false
+
+  # allow spacing for readability
+  SpaceAfterPropertyColon:
+    style: at_least_one_space
+
+  # disable in lieu of FuzzyPropertyOrder
+  PropertySortOrder:
+    enabled: false
+
+  FuzzyPropertyOrder:
+    enabled: true
+    ignore_unspecified:   true
+    space_between_groups: true
+    min_group_size:       3
+    order:
+      display:
+        - position
+        - display
+        - visibility
+        - overflow*
+        - float
+        - clear
+        - content
+        - box-sizing
+      flex-parent:
+        - flex-direction
+        - flex-wrap
+        - flex-flow
+        - justify-content
+        - align-items
+        - align-content
+      flex-child:
+        - flex
+        - order
+        - flex-grow
+        - flex-shrink
+        - flex-basis
+        - align-self
+      tables:
+        - table-layout
+        - border-collapse
+        - empty-cells
+      dimensional:
+        - top
+        - left
+        - bottom
+        - right
+        - height
+        - min-height
+        - max-height
+        - width
+        - min-width
+        - max-width
+        - padding*
+        - margin*
+        - border*
+        - transform
+      presentational:
+        - outline*
+        - background*
+        - opacity
+        - z-index
+        - color
+        - box-shadow
+        - filter
+      lists:
+        - list-style*
+      text:
+        - font*
+        - line-height
+        - letter-spacing
+        - text-align
+        - text-decoration
+        - text-indent
+        - text-transform
+        - text-shadow
+        - white-space
+      interaction:
+        - transition
+        - animation
