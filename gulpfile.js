@@ -5,6 +5,8 @@ var Combine     = require('stream-combiner');
 var postcss     = require('gulp-postcss');
 var runSequence = require('run-sequence');
 var rename      = require('gulp-rename');
+var sourcemaps  = require('gulp-sourcemaps');
+var scsslint    = require('gulp-scss-lint');
 
 
 var paths = {
@@ -62,6 +64,17 @@ gulp.task('sass', function()
 	return combined;
 });
 
+// SASS linting
+gulp.task('sasslint', function()
+{
+    return  gulp.src(paths.sassWatch)
+                .pipe(scsslint({
+                   'config': './.scss-lint.yml',
+                   'bundleExec': true
+                }));
+
+});
+
 // JS munging
 gulp.task('js', function()
 {
@@ -82,7 +95,7 @@ gulp.task('js', function()
 // watch task
 gulp.task('watch', function()
 {
-    gulp.watch(paths.sassWatch, ['sass']);
+    gulp.watch(paths.sassWatch, ['sass', 'sasslint']);
 	// gulp.watch(paths.jsWatch,   ['js']  );
 });
 
