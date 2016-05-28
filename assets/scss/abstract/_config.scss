@@ -12,7 +12,7 @@ $px-in-rem: 16;
 // These can be accessed using the palette() function
 // ==========================================================================
 $palette: (
-
+    keyline:    #666
 );
 
 
@@ -49,15 +49,17 @@ $font-weights: (
 //   later)
 // ==========================================================================
 $dimensions: (
-    gutter:     20
+    gutter:     20,
+    keyline:    2
 );
 
 // ==========================================================================
 // # Grid dimensions: specified per breakpoint (see mq-breakpoints below)
 // ==========================================================================
 $grid-cfg: (
-    gutter:  map-get($dimensions, 'gutter'),
-    margin:  map-get($dimensions, 'gutter'),
+    gutter:    map-get($dimensions, 'gutter'),
+    margin:    map-get($dimensions, 'gutter'),
+    separator: map-get($dimensions, 'keyline'),
     breakpoints: (
         small: (
             columns: 2,
@@ -66,6 +68,14 @@ $grid-cfg: (
             )
         ),
         medium: (
+            columns: 12,
+            aliases: (
+                third:   4,
+                quarter: 3,
+                half:    6
+            )
+        ),
+        large: (
             columns: 12,
             aliases: (
                 third:   4,
