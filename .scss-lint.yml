@@ -34,3 +34,6 @@ linters:
   # disable in lieu of FuzzyPropertyOrder
   PropertySortOrder:
     enabled: false
+
+  GroupedPropertyOrder:
+    style: personal
