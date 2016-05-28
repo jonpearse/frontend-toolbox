@@ -27,6 +27,9 @@ linters:
   StringQuotes:
     enabled: false
 
+  SelectorFormat:
+    convention: hyphenated_BEM
+
   # allow spacing for readability
   SpaceAfterPropertyColon:
     style: at_least_one_space
