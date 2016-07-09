@@ -20,6 +20,7 @@
 
     // # MODIFIERS
     // ==========================================================================
+    &.-right   { justify-content: flex-end; }
     &.-justify { justify-content: space-between; }
     &.-no-wrap { flex-wrap: nowrap; }
 
@@ -37,13 +38,13 @@
         // ======================================================================
         // full-width
         &.-full {
-            flex: 100%;
+            flex:      100%;
             max-width: 100%;
         }
 
         // remaining space
         &.-remaining {
-            flex:      1;
+            flex: 1;
         }
 
         // # per-responsive breakpoint
@@ -56,7 +57,7 @@
 
     // # SPACING VARIANTS
     // ==========================================================================
-    &.-x2-gutter {
+    &.-double-gutter {
         margin-left:  rem(-#{$_gutter});
         margin-right: rem(-#{$_gutter});
 
@@ -66,22 +67,38 @@
         }
     }
 
+    &.-half-gutter {
+        margin-left:  rem(-#{$_gutter / 4});
+        margin-right: rem(-#{$_gutter / 4});
+
+        > .grid__col {
+            padding-left:  rem(#{$_gutter / 4});
+            padding-right: rem(#{$_gutter / 4});
+        }
+    }
+
     // # MARGIN VARIANTS
     // ==========================================================================
-    &.-x2-margin {
+    &.-double-margin {
         margin-bottom: rem(-#{$_margin * 2});
 
         > .grid__col { margin-bottom: rem(#{$_margin * 2}); }
     }
 
+    &.-half-margin {
+        margin-bottom: rem(-#{$_margin / 2});
+
+        > .grid__col { margin-bottom: rem(#{$_margin / 2}); }
+    }
+
     // # SEPARATED GRID
     // ==========================================================================
     &.-separated {
-        transform: translateX( rem(-#{$_separator / 2}) );
+        transform: translateX( rem(-#{$_separator}) );
 
         .grid__col {
             position:  relative;
-            transform: translateX( rem(#{$_separator / 2}) );
+            transform: translateX( rem(#{$_separator}) );
 
             // scss-lint:disable NestingDepth
             &:not(:last-child)::after {

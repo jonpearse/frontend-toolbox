@@ -1,0 +1,19 @@
+// ==========================================================================
+// # BANDS
+//
+// These are horizontal sections of the page, sometimes with colour, and
+// usually containing .container that force space above/below their content
+// ==========================================================================
+
+// base
+.band {
+    padding: rem(20) 0;
+
+    // VARIANTS
+    // -no*
+    &.-no-top[class] { padding-top: 0; }
+    &.-no-bottom[class] { padding-bottom: 0; }
+
+    &.-double-top { padding-top: rem(40); }
+    &.-double-bottom { padding-bottom: rem(40); }
+}

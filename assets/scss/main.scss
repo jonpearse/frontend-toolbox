@@ -17,9 +17,13 @@
 // 3. everything in base
 @import "base/reset";
 @import "base/breaks";
+@import "base/elements";
+@import "base/type";
 
 // 4. all layout—this should be glob-safe, so we’ll do it that way
-@import "layout/*";
+@import "layout/grid";
+// @import "layout/bands";
+// @import "layout/containers";
 
 // 5. all components—again, this should be glob-safe
 @import "component/*";

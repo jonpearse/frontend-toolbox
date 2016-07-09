@@ -1,0 +1,9 @@
+// ==========================================================================
+// # Base element overrides
+// ==========================================================================
+
+// all first-children shouldn’t have a top margin
+*:first-child[class] { margin-top: 0; }
+
+// similarly, last children shouldn’t have a bottom margin
+*:last-child[class]  { margin-bottom: 0; }

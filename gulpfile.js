@@ -11,29 +11,31 @@ var scsslint    = require('gulp-scss-lint');
 
 var paths = {
 	// SASS
-	sassWatch:   'assets/scss/**/*.scss',
-	sassCompile: ['assets/scss/*.scss', '!assets/scss/_*.scss'],
-	sassOutput:  'assets/css',
+    sass: {
+        watch:   'assets/scss/**/*.scss',
+        compile: ['assets/scss/*.scss', '!assets/scss/_*.scss'],
+        output:  'assets/css'
+    },
 
-	// JS stuff
-	jsWatch:     'assets/source/**/*.js',
-	jsCompile:   [
-		//'assets/js-source/contrib/YOUR-FRAMEWORK-HERE.js',
-		'assets/source/contrib/*',
-		'assets/source/core/app.js',
-		'assets/source/core/*.js',
-		'assets/source/behaviours/*.js',
-		'assets/source/handlers/*.js',
-		'assets/source/app.js'
-	],
-	jsOutput:    'assets/js/',
+    // JS
+    js: {
+        watch:   'assets/source/**/*.js',
+        compile: [
+            'assets/source/contrib/YOUR-FRAMEWORK-HERE.js',
+            'assets/source/core/app.js',
+            'assets/source/core/*.js',
+            'assets/source/handlers/*.js',
+    		'assets/source/app.js'
+        ],
+        output:  'assets/js/'
+    }
 };
 
 // SASS compilation task
 gulp.task('sass', function()
 {
 	var combined = Combine(
-		gulp.src(paths.sassCompile),
+		gulp.src(paths.sass.compile),
         sassGlob(),
         sourcemaps.init(),
 		sass({
@@ -44,7 +46,7 @@ gulp.task('sass', function()
             require('css-mqpacker')
         ]),
         sourcemaps.write(),
-		gulp.dest(paths.sassOutput),
+		gulp.dest(paths.sass.output),
 		postcss([
             require('postcss-sorting'),
             require('cssnano')({
@@ -54,7 +56,7 @@ gulp.task('sass', function()
             })
         ]),
         rename({ suffix: '.min' }),
-		gulp.dest(paths.sassOutput)
+		gulp.dest(paths.sass.output)
 	);
 	combined.on('error', function(err)
 	{
@@ -67,7 +69,7 @@ gulp.task('sass', function()
 // SASS linting
 gulp.task('sasslint', function()
 {
-    return  gulp.src(paths.sassWatch)
+    return  gulp.src(paths.sass.watch)
                 .pipe(scsslint({
                    'config': './.scss-lint.yml',
                    'bundleExec': true
@@ -95,7 +97,7 @@ gulp.task('js', function()
 // watch task
 gulp.task('watch', function()
 {
-    gulp.watch(paths.sassWatch, ['sass', 'sasslint']);
+    gulp.watch(paths.sass.watch, ['sass', 'sasslint']);
 	// gulp.watch(paths.jsWatch,   ['js']  );
 });
 
