@@ -1,0 +1,22 @@
+h1. Frontend Toolbox
+
+Many years ago, when IE6 was a serious consideration and not something we scare junior front-end developers with, I went to "@media 2009":http://lanyrd.com/2009/atmedia/, where "Simon Collison":http://colly.com/ talked about building a development toolkit to act as a foundation for new projects.
+I thought this was a great idea, but due to one thing and another, I didn’t take it any further than thinking.
+
+Now, several years later, I’ve spent a little time putting something together, and in the spirit of sharing, this is it.
+
+This will almost certainly never reach any kind of formal release stage (ie, it’ll never hit 1.0.0), and will almost certainly change beyond previous recognition every year or two as I come across newer/better ways of doing things.
+Additionally, I make no claim that anything here is the “best way” of doing anything, or remotely resembles “best practice”—this is simply a reflection of what was working best for me the last time I updated it =)
+
+If you’ve any questions/comments about anything here, "drop me a line":mailto:hello@jonpearse.net or prod me on "Twitter":https://twitter.com/jonpearse
+
+h2. Updates
+
+h3. 0.1.0 _(September 2016)_
+
+Added basic Javascript structure using webpack and something CommonJS-y. This is probably old-hat compared to more modern ES201x module loading, but I like it…
+I’ve also tweaked the way Gulp tasks are defined to hopefully make things a little tidier.
+
+h3. 0.0.x _(May–August 2016)_
+
+General setup and fleshing out of toolkit, and basic CSS shenanigans.
