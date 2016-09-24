@@ -34,7 +34,7 @@ linters:
   SpaceAfterPropertyColon:
     style: at_least_one_space
 
-  # disable in lieu of FuzzyPropertyOrder
+  # disable in lieu of GroupedPropertyOrder
   PropertySortOrder:
     enabled: false
 

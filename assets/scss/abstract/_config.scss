@@ -63,26 +63,7 @@ $grid-cfg: (
     separator: map-get($dimensions, 'keyline'),
     breakpoints: (
         small: (
-            columns: 2,
-            aliases: (
-                half:   1
-            )
-        ),
-        medium: (
-            columns: 12,
-            aliases: (
-                third:   4,
-                quarter: 3,
-                half:    6
-            )
-        ),
-        large: (
-            columns: 12,
-            aliases: (
-                third:   4,
-                quarter: 3,
-                half:    6
-            )
+            columns: 2
         )
     )
 );

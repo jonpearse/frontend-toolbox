@@ -15,7 +15,10 @@
         @include grid-build-numerics($columns, str-slice($breakpoint, 0, 1));
 
         // build named columns
-        @include grid-build-named($columns, $aliases, str-slice($breakpoint, 0, 1));
+        @if ($aliases != null)
+        {
+            @include grid-build-named($columns, $aliases, str-slice($breakpoint, 0, 1));
+        }
     }
 }
 
