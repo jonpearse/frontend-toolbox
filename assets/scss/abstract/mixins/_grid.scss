@@ -1,0 +1,49 @@
+// ==========================================================================
+// # GRID MIXINS
+// ==========================================================================
+
+@mixin grid-build-at( $breakpoint, $config )
+{
+    // calculate unit width
+    $columns: map-get($config, 'columns');
+    $aliases: map-get($config, 'aliases');
+
+    // wrap in mq
+    @include mq($from: $breakpoint)
+    {
+        // build numeric columns
+        @include grid-build-numerics($columns, str-slice($breakpoint, 0, 1));
+
+        // build named columns
+        @if ($aliases != null)
+        {
+            @include grid-build-named($columns, $aliases, str-slice($breakpoint, 0, 1));
+        }
+    }
+}
+
+@mixin grid-build-numerics($columns, $prefix)
+{
+    $unit-width: 100% / $columns;
+
+    @for $i from 1 through $columns
+    {
+        &.-#{$prefix}#{$i} {
+            flex:      #{$unit-width * $i};
+            max-width: #{$unit-width * $i};
+        }
+    }
+}
+
+@mixin grid-build-named($columns, $aliases, $prefix)
+{
+    $unit-width: 100% / $columns;
+
+    @each $alias, $columns in $aliases
+    {
+        &.-#{$prefix}-#{$alias} {
+            flex:      #{$unit-width * $columns};
+            max-width: #{$unit-width * $columns};
+        }
+    }
+}

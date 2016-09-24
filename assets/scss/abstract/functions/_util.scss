@@ -1,0 +1,28 @@
+/// Converts a unit-less number to rem. This is similar to the bourbon function of the same name, except it assumes the
+/// input to be in pixels. That is, there is no unit conversion here.
+///
+/// @param  {number} $px    A number in pixels to convert to rems
+@function rem($px)
+{
+    @if type-of($px) != 'number'
+    {
+        $px: to-number($px);
+    }
+    @return ($px / $px-in-rem) * 1rem;
+}
+
+/// Grabs a colour from the $palette variable: this is to ensure we don’t have too many bare colours floating around
+/// the system =)
+///
+/// @param {string} $color  the colour to retrieve from the palette
+@function palette( $color )
+{
+    @if map-has-key($palette, $color)
+    {
+        @return map-get($palette, $color);
+    }
+    @else
+    {
+        @warn "Attempting to use undefined colour #{color}";
+    }
+}

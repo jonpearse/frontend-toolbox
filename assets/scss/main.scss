@@ -1,0 +1,38 @@
+@charset 'utf-8';
+
+// ==========================================================================
+// # MAIN CSS FILE. Include ALL THE THINGS
+// ==========================================================================
+
+// 0. config
+@import "abstract/config";
+
+// 1. abstracts
+@import "abstract/functions/*";
+@import "abstract/mixins/*";
+
+// 2. vendor-provided stuff—probably safe to glob
+@import "vendor/*";
+
+// 3. everything in base
+@import "base/reset";
+@import "base/breaks";
+@import "base/elements";
+@import "base/type";
+
+// 4. all layout—this should be glob-safe, so we’ll do it that way
+@import "layout/grid";
+// @import "layout/bands";
+// @import "layout/containers";
+
+// 5. all components—again, this should be glob-safe
+@import "component/*";
+
+// 6. import objects: again, glob-safe
+@import "object/*";
+
+// 7. pages. If these aren’t glob safe, you’re doing it wrong =)
+@import "pages/*";
+
+// 8. SHAME!
+@import "shame";

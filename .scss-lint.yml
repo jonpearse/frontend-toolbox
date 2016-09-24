@@ -1,0 +1,42 @@
+exclude:
+  - assets/scss/abstract/functions/_cast.scss
+  - assets/scss/vendor/*
+  - assets/scss/base/_reset.scss
+
+plugin_gems: ['grouped_property_scss_linter']
+
+linters:
+  # match up with .editorconfig
+  Indentation:
+    width: 4
+
+  # disable this because 1TBS is Nasty™
+  ElsePlacement:
+    enabled: false
+
+  SpaceBetweenParens:
+    enabled: false
+
+  # unfortunately, my style is inconsistent between @rule and .selector, so just disable this for now
+  SpaceBeforeBrace:
+    enabled: false
+
+  HexNotation:
+    enabled: false
+
+  StringQuotes:
+    enabled: false
+
+  SelectorFormat:
+    convention: hyphenated_BEM
+
+  # allow spacing for readability
+  SpaceAfterPropertyColon:
+    style: at_least_one_space
+
+  # disable in lieu of GroupedPropertyOrder
+  PropertySortOrder:
+    enabled: false
+
+  GroupedPropertyOrder:
+    style: personal

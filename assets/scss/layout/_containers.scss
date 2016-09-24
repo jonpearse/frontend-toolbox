@@ -1,0 +1,13 @@
+// ==========================================================================
+// # CONTAINERS
+//
+// These are sections of the page that are constrained by their width
+// ==========================================================================
+
+// base container classes
+.container {
+    margin: 0 auto;
+    width:  100%;
+    max-width: rem(1140);
+    padding: 0 rem(20);
+}

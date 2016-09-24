@@ -1,0 +1,39 @@
+{
+  "name": "frontend-toolbox",
+  "version": "0.1.0",
+  "description": " ",
+  "main": "gulpfile.js",
+  "scripts": {
+    "postinstall": "bundle install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonpearse/frontend-toolbox.git"
+  },
+  "author": "Jon Pearse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonpearse/frontend-toolbox/issues"
+  },
+  "homepage": "https://github.com/jonpearse/frontend-toolbox#readme",
+  "dependencies": {
+    "autoprefixer": "^6.4.1",
+    "css-mqpacker": "^5.0.1",
+    "cssnano": "^3.7.5",
+    "deep-assign": "^2.0.0",
+    "expose-loader": "^0.7.1",
+    "gulp": "^3.9.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sass-glob": "^1.0.6",
+    "gulp-scss-lint": "^0.4.0",
+    "gulp-uglify": "^2.0.0",
+    "postcss-sorting": "^1.6.1",
+    "require-dir": "^0.3.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "devDependencies": {}
+}

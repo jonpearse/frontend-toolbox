@@ -1,0 +1,118 @@
+// ==========================================================================
+// # BASIC GRID FILE
+// ==========================================================================
+
+// # Main grid class
+// ==========================================================================
+.grid {
+    // grab some basic configuration
+    $_gutter:    map-get($grid-cfg, 'gutter');
+    $_margin:    map-get($grid-cfg, 'margin');
+    $_separator: map-get($grid-cfg, 'separator');
+
+    // start some styles
+    overflow:  hidden;
+    display:   flex;
+    flex-wrap: wrap;
+
+    // note: negative margin because all columns have +ve margins
+    margin: 0 rem(-#{$_gutter / 2}) rem(-$_margin);
+
+    // # MODIFIERS
+    // ==========================================================================
+    // &.-right   { justify-content: flex-end; }
+    // &.-justify { justify-content: space-between; }
+    // &.-no-wrap { flex-wrap: nowrap; }
+
+    // # GRID COLUMNS
+    // ==========================================================================
+    &__col {
+
+        // base styles
+        width:         100%;
+        padding-left:  rem(#{$_gutter / 2});
+        padding-right: rem(#{$_gutter / 2});
+        margin-bottom: rem($_margin);
+
+        // # Basic named variants
+        // ======================================================================
+        // full-width
+        &.-full {
+            flex:      100%;
+            max-width: 100%;
+        }
+
+        // remaining space
+        &.-remaining {
+            flex: 1;
+        }
+
+        // # per-responsive breakpoint
+        // ======================================================================
+        @each $break, $cfg in map-get($grid-cfg, 'breakpoints')
+        {
+            @include grid-build-at($break, $cfg);
+        }
+    }
+
+    // # SPACING VARIANTS
+    // ==========================================================================
+    // &.-double-gutter {
+    //     margin-left:  rem(-#{$_gutter});
+    //     margin-right: rem(-#{$_gutter});
+    //
+    //     > .grid__col {
+    //         padding-left:  rem($_gutter);
+    //         padding-right: rem($_gutter);
+    //     }
+    // }
+    //
+    // &.-half-gutter {
+    //     margin-left:  rem(-#{$_gutter / 4});
+    //     margin-right: rem(-#{$_gutter / 4});
+    //
+    //     > .grid__col {
+    //         padding-left:  rem(#{$_gutter / 4});
+    //         padding-right: rem(#{$_gutter / 4});
+    //     }
+    // }
+
+    // # MARGIN VARIANTS
+    // ==========================================================================
+    // &.-double-margin {
+    //     margin-bottom: rem(-#{$_margin * 2});
+    //
+    //     > .grid__col { margin-bottom: rem(#{$_margin * 2}); }
+    // }
+    //
+    // &.-half-margin {
+    //     margin-bottom: rem(-#{$_margin / 2});
+    //
+    //     > .grid__col { margin-bottom: rem(#{$_margin / 2}); }
+    // }
+
+    // # SEPARATED GRID
+    // ==========================================================================
+    // &.-separated {
+    //     transform: translateX( rem(-#{$_separator}) );
+    //
+    //     .grid__col {
+    //         position:  relative;
+    //         transform: translateX( rem(#{$_separator}) );
+    //
+    //         // scss-lint:disable NestingDepth
+    //         &:not(:last-child)::after {
+    //             position: absolute;
+    //
+    //             top:    0;
+    //             bottom: 0;
+    //             right:  0;
+    //             width:  rem($_separator);
+    //             transform: translateX(50%);
+    //
+    //             background: palette(keyline);
+    //             content:  "";
+    //         }
+    //     }
+    // }
+}

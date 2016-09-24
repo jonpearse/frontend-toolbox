@@ -1,0 +1,4 @@
+node_modules
+assets/css/*
+assets/js/*
+Gemfile.lock
