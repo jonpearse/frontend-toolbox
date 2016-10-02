@@ -27,12 +27,28 @@ gulp.task('js', function()
                             paths.js.context
                         ]
                     },
+                    module: {
+                        loaders: [
+                            {
+                                test: /\.js$/,
+                                exclude: /(node_modules|bower_components)/,
+                                loader: 'babel',
+                                query: {
+                                    presets: ['es2015'],
+                                    plugins: ['transform-object-assign']
+                                }
+                            }
+                        ],
+                    },
                     output:  { filename: '[name].js' }
                 }))
                 .pipe(gulp.dest( paths.js.output ))
                 .pipe(uglify({
                     output: {
                         max_line_len: 120
+                    },
+                    compress: {
+                        drop_console: true
                     }
                 }))
                 .pipe(rename({ suffix: '.min' }))
