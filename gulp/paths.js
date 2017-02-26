@@ -9,6 +9,7 @@ var localPaths = (fs.existsSync(localFile)) ? require(localFile) : {};
 // output
 module.exports = require('deep-assign')({
     root: root,
+    build: root+'/assets/dist',
 
     sass: {
         watch:   root+'/assets/scss/**/*.scss',

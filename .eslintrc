@@ -1,0 +1,41 @@
+{
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "__ENV__": true
+  },
+  "rules": {
+    "complexity": [2, 10],
+    "no-bitwise": 2,
+    "camelcase": [2, { "properties": "never" }],
+    "curly": [2, "all"],
+    "eqeqeq": 2,
+    "wrap-iife": 2,
+    "indent": 2,
+    "no-use-before-define": 2,
+    "new-cap": 2,
+    "no-caller": 2,
+    "quotes": [2, "single"],
+    "strict": [2, "global"],
+    "no-undef": 2,
+    "no-unused-vars": 2,
+    "no-empty": 2,
+    "comma-dangle": [2, "never"],
+    "max-len": [2, 220],
+    "comma-style": [2, "last"],
+    "dot-notation": 2,
+    "brace-style": [2, "allman", { "allowSingleLine": false }],
+    "one-var": [2, "never"],
+    "operator-linebreak": [2, "after"],
+    "space-infix-ops": 2,
+    "space-before-blocks": [2, "always"],
+    "eol-last": 2
+  }
+}
