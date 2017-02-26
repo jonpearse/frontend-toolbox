@@ -15,14 +15,12 @@ var oRegisteredBehaviours = {};
  */
 function getOptionsFor(el, sNamespace, oDefaults)
 {
-    "use strict";
-
     // 1. return variable and regex object
-    var oReturn = Object.assign(oDefaults);
-    var oRegex  = new RegExp('^'+sNamespace+'(.*)$');
+    let oReturn = Object.assign(oDefaults);
+    let oRegex  = new RegExp(`^${sNamespace}(.*)$`);
 
     // 2. useful callback function
-    var fnAssign = function(key, value)
+    let fnAssign = function(key, value)
     {
         // a. if it’s the behaviour hook…
         if ((key === 'behaviour') || (key === 'boundBehaviours'))
@@ -41,7 +39,7 @@ function getOptionsFor(el, sNamespace, oDefaults)
         }
 
         // c. convert the key
-        key = (''+key).replace(sNamespace, '');
+        key = ('' + key).replace(sNamespace, '');
         key = key.substr(0,1).toLowerCase() + key.substr(1);
 
         // d. assign
@@ -49,20 +47,13 @@ function getOptionsFor(el, sNamespace, oDefaults)
     };
 
     // 3. iterate through dataset looking for matching attributes
-    for (var k in el.dataset)
+    Object.keys(el.dataset).forEach(function(sKey)
     {
-        // a. sanity check. Also, don’t pass ‘behaviour’
-        if (!el.dataset.hasOwnProperty(k))
+        if ((sNamespace === '') || oRegex.text(sKey))
         {
-            continue;
+            fnAssign(sKey, el.dataset[sKey]);
         }
-
-        // b. if it looks good, pass off
-        if ((sNamespace === '') || oRegex.test(k))
-        {
-            fnAssign(k, el.dataset[k]);
-        }
-    }
+    });
 
     // 2. return
     return oReturn;
@@ -94,8 +85,8 @@ function bindBehaviours(elBindAt)
             }
 
             // b. get some options
-            var oBehaviour = oRegisteredBehaviours[sBehaviour];
-            var oOptions   = getOptionsFor(elNode, oBehaviour.namespace, oBehaviour.defaults);
+            let oBehaviour = oRegisteredBehaviours[sBehaviour];
+            let oOptions   = getOptionsFor(elNode, oBehaviour.namespace, oBehaviour.defaults);
 
             // c. debug
             console.group(`Binding behaviour ‘${sBehaviour}’`);
