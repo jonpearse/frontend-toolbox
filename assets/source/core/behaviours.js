@@ -89,7 +89,7 @@ function bindBehaviours(elBindAt)
             elNode.boundBehaviours = elNode.boundBehaviours || {};
             if (elNode.boundBehaviours[sBehaviour] !== undefined)
             {
-                console.warn(`Attempting to rebind sBehaviour ’${sBehaviour}‘: ignoring`);
+                console.warn(`Attempting to rebind behaviour ’${sBehaviour}‘: ignoring`);
                 return false;
             }
 
@@ -98,7 +98,7 @@ function bindBehaviours(elBindAt)
             var oOptions   = getOptionsFor(elNode, oBehaviour.namespace, oBehaviour.defaults);
 
             // c. debug
-            console.group(`Binding component ‘${sBehaviour}’`);
+            console.group(`Binding behaviour ‘${sBehaviour}’`);
             console.debug('Options:', oOptions);
             console.groupEnd();
 
