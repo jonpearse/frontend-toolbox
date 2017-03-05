@@ -43,8 +43,7 @@ gulp.task('sass-build', [ 'sass' ], function()
                     require('postcss-sorting'),
                     require('cssnano')({
                         safe: true,
-                        autoprefixer: false,
-                        orderedValues: false
+                        autoprefixer: false
                     })
                 ]))
                 .pipe(gulp.dest( paths.build ));
