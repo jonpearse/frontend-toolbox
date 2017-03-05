@@ -89,7 +89,7 @@ module.exports = {
     init:  [ 'js' ],
     watch: {
         files: paths.js.watch,
-        tasks: [ 'js' ]
+        tasks: [ 'js', 'js-lint' ]
     },
     lint:  [ 'js-lint' ],
     build: [ 'js-build' ],
