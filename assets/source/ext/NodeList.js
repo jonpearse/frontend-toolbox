@@ -5,13 +5,13 @@
  *********************************************************************************************************************/
 module.exports = (function()
 {
-    /**
-     * Shims forEach into NodeList for browsers that don’t support it.
-     *
-     * @param   fCallback   the function to call on each matched element in the NodeList
-     */
-    if (NodeList.forEach === undefined)
+    if (typeof NodeList.prototype.forEach !== 'function')
     {
+        /**
+         * Shims forEach into NodeList for browsers that don’t support it.
+         *
+         * @param   {function} fCallback - the function to call on each matched element in the NodeList
+         */
         NodeList.prototype.forEach = function(fCallback)
         {
             for (let i = 0; i < this.length; i++)
