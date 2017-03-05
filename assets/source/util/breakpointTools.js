@@ -27,6 +27,9 @@ let aBreakpoint = [];
 
     }).sort((a, b) => b.size < a.size).map((oBreak) => oBreak.name);
 
+    console.group('Breakpoint Tools initialised');
+    console.debug('Found breakpoints: ', aBreakpoint);
+    console.groupEnd();
 }());
 
 /**
