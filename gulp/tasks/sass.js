@@ -27,7 +27,7 @@ gulp.task('sass', function()
                     outputStyle:  'expanded'
                 }))
                 .pipe(postcss([
-                    require('autoprefixer')({ browsers: [ 'last 2 versions' ]}),
+                    require('autoprefixer')({ browsers: [ '> 1%', 'IE >= 10' ]}),
                     require('css-mqpacker')({ sort: true })
                 ]))
                 .pipe(gulp.dest( paths.sass.output ));
