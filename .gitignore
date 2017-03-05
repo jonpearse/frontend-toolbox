@@ -5,5 +5,9 @@ assets/js/*
 !assets/js/.gitkeep
 assets/dist/*
 !assets/dist/.gitkeep
+assets/icons/*
+!assets/icons/.gitkeep
+assets/img/*
+!assets/img/.gitkeep
 Gemfile.lock
 yarn.lock

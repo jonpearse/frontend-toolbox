@@ -25,6 +25,11 @@ module.exports = require('deep-assign')({
             app: 'assets/source/app.js'
         },
         output: root+'/assets/js'
-    }
+    },
 
+    svg: {
+        watch:  root+'/assets/icons/**/*.svg',
+        source: root+'/assets/icons/**/*.svg',
+        output: root+'/assets/img/'
+    }
 }, localPaths);
