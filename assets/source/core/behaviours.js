@@ -5,14 +5,17 @@
  *********************************************************************************************************************/
 
 // internal register of behaviours
-var oRegisteredBehaviours = {};
+let oRegisteredBehaviours = {};
 
 /**
  * Returns options for a behaviour in a given namespace.
  *
- * @param   el  the element to read from
- * @param   sNamespace  the namespace
+ * @param   {HTMLElement} el - the element to read from
+ * @param   {String} sNamespace - the namespace from which to read options
+ * @param   {Object} oDefaults - an object containing defaults for the behaviour
+ * @return  {Object} the options for this behaviour
  */
+/* eslint-disable complexity */
 function getOptionsFor(el, sNamespace, oDefaults)
 {
     // 1. return variable and regex object
@@ -49,7 +52,7 @@ function getOptionsFor(el, sNamespace, oDefaults)
     // 3. iterate through dataset looking for matching attributes
     Object.keys(el.dataset).forEach(function(sKey)
     {
-        if ((sNamespace === '') || oRegex.text(sKey))
+        if ((sNamespace === '') || oRegex.test(sKey))
         {
             fnAssign(sKey, el.dataset[sKey]);
         }
@@ -58,14 +61,17 @@ function getOptionsFor(el, sNamespace, oDefaults)
     // 2. return
     return oReturn;
 }
+/* eslint-enable complexity */
 
-function bindBehaviours(elBindAt)
+/**
+ * Binds behaviours on a specific element.
+ *
+ * @param   {HTMLElement} elBindAt - the root HTML element at which we should start binding
+ */
+function bindBehaviours(elBindAt = document)
 {
-    // 0. default our root element
-    elBindAt = elBindAt || document;
-
     // 1. start binding
-    elBindAt.querySelectorAll('[data-behaviour]').each(function(elNode)
+    elBindAt.querySelectorAll('[data-behaviour]').forEach(function(elNode)
     {
         elNode.dataset.behaviour.trim().split(/\s+/).forEach(function(sBehaviour)
         {
@@ -99,36 +105,34 @@ function bindBehaviours(elBindAt)
     });
 }
 
-function registerBehaviours(aoBehaviour, bAutoBind)
+/**
+ * Registers an array of behaviours, optionally with autobinding.
+ *
+ * @param {Array} aoBehaviour - an array of behaviour objects
+ * @param {boolean} bAutoBind - whether or not to immediately autobind to the document (default: true)
+ * @return {boolean} true on success, false otherwise
+ */
+function registerBehaviours(aoBehaviour, bAutoBind = true)
 {
-    // 0. default autobind
-    bAutoBind = bAutoBind || true;
-
     // 1. iterate through behaviours
     aoBehaviour.forEach(function(oBehaviour)
     {
-        // a. if we don’t have a name or init
+        // a. default things out
+        oBehaviour = Object.assign({
+            defaults: {},
+            namespace: '',
+        }, oBehaviour);
+
+        // b. if we don’t have a name or init
         if ((oBehaviour.name === undefined) || (oBehaviour.init === undefined))
         {
-            console.error('Poorly defined behaviour: skipping', oBehaviour);
-            return false;
+            throw new TypeError('No name or initialiser found for behaviour');
         }
 
-        // b. if we already know about that behaviour
+        // c. if we already know about that behaviour
         if (oRegisteredBehaviours[oBehaviour.name] !== undefined)
         {
-            console.error(`Attempting to re-register behaviour ‘${oBehaviour.name}’: skipping`);
-            return false;
-        }
-
-        // c. default some things
-        if (oBehaviour.defaults === undefined)
-        {
-            oBehaviour.defaults = {};
-        }
-        if (oBehaviour.namespace === undefined)
-        {
-            oBehaviour.namespace = '';
+            throw new TypeError(`Duplicate behaviour ‘${oBehaviour.name}’`);
         }
 
         // d. register it
@@ -146,5 +150,5 @@ function registerBehaviours(aoBehaviour, bAutoBind)
 
 module.exports = {
     init: registerBehaviours,
-    bind: bindBehaviours
+    bind: bindBehaviours,
 };

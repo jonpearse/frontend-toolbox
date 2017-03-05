@@ -11,8 +11,8 @@
 /**
  * Main behaviour function. This is called within the context of the element to which the behaviour is bound.
  *
- * @param   oOptions    an object containing options specified in the element’s data attributes
- * @return  whatever needs to be passed back to the behaviour manager
+ * @param   {Object} oOptions} - an object containing options specified in the element’s data attributes
+ * @return  {mixed} whatever needs to be passed back to the behaviour manager
  */
 function ExampleBehaviour(oOptions)
 {
@@ -56,6 +56,6 @@ module.exports = {
      */
     defaults: {
         foo: 'bar',
-        baz: true
-    }
+        baz: true,
+    },
 };
