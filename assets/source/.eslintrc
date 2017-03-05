@@ -20,7 +20,7 @@
     "camelcase": [ "error", {
       "properties": "never" }
     ],
-    "comma-dangle": ["warn", "always"],
+    "comma-dangle": ["warn", "only-multiline"],
     "comma-style": ["error", "last"],
     "complexity": ["error", 5],
     "dot-notation": "error",
