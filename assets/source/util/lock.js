@@ -8,7 +8,7 @@
 
 const DEFAULT_LOCK_NAME = 'lock';
 
-export default (function()
+module.exports = (function()
 {
     let oLockStore = {};
     let aQueue = [];
@@ -20,7 +20,7 @@ export default (function()
      */
     function runQueueFor(sLockName)
     {
-        aQueue.filter((oI) =>
+        aQueue.filter(oI =>
         {
             if (oI.sLock === sLockName)
             {
@@ -133,6 +133,17 @@ export default (function()
             }
             fCallback();
             return true;
+        },
+
+        /**
+         * Like if(), above, but returns a promise.
+         *
+         * @param   {string}    sLockName - an optional lock name
+         * @return  {Promise}   a promise that will resolve if the lock is available, and fail if not.
+         */
+        promise: (sLockName = DEFAULT_LOCK_NAME) =>
+        {
+            return new Promise((resolve, reject) => lock(sLockName) ? resolve() : reject());
         },
 
         /**

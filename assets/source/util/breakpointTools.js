@@ -20,12 +20,12 @@ let aBreakpoint = [];
     }
 
     // 2. split individual breakpoints out
-    aBreakpoint = aMatch[1].split(/,\s*/).map((sBreak) =>
+    aBreakpoint = aMatch[1].split(/,\s*/).map(sBreak =>
     {
         let aBreak = sBreak.split(/:\s*/);
         return { name: aBreak[0], size: parseInt(aBreak[1], 10) };
 
-    }).sort((a, b) => b.size < a.size).map((oBreak) => oBreak.name);
+    }).sort((a, b) => b.size < a.size).map(oBreak => oBreak.name);
 
     console.group('Breakpoint Tools initialised');
     console.debug('Found breakpoints: ', aBreakpoint);

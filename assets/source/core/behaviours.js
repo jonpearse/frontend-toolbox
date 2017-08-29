@@ -19,7 +19,7 @@ let oRegisteredBehaviours = {};
 function getOptionsFor(el, sNamespace, oDefaults)
 {
     // 1. return variable and regex object
-    let oReturn = Object.assign(oDefaults);
+    let oReturn = Object.assign({}, oDefaults);
     let oRegex  = new RegExp(`^${sNamespace}(.*)$`);
 
     // 2. useful callback function
