@@ -12,6 +12,6 @@ require('ext/NodeList');
 require('ext/Number');
 
 // Init behaviours
-/*require('core/behaviours').init([
-    // require('behaviour/EXAMPLE')
-]);*/
+// require('./core/behaviours').init([
+//     require('./behaviour/EXAMPLE')
+// ]);

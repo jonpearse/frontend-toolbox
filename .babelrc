@@ -1,12 +1,12 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["> 1%", "IE >= 10"]
-      }
-    }]
-  ],
-  "plugins": [
-    "transform-object-assign"
-  ]
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": ["> 1%"]
+                }
+            }
+        ]
+    ]
 }
