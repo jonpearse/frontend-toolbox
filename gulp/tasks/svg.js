@@ -27,7 +27,8 @@ gulp.task('svg-icons', function()
                         { removeDoctype: true },
                         { cleanupIDs: false },
                         { removeStyleElement: true },
-                        { removeAttrs: { attrs: [ 'fill', 'style', 'stroke.*', 'class' ]}}
+                        { removeTitle: true },
+                        { removeAttrs: { attrs: [ 'style', 'stroke.*', 'class' ]}}
                     ]
                 }))
                 .pipe(rename( 'spritesheet.svg' ))
@@ -36,6 +37,7 @@ gulp.task('svg-icons', function()
 
 // return hooks
 module.exports = {
+    init:  [ 'svg-icons' ],
     watch: {
         files: paths.svg.watch,
         tasks: [ 'svg-icons' ]
