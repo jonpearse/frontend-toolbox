@@ -1,16 +1,16 @@
 // ==========================================================================
 // # SASS functions
 // ==========================================================================
-var gulp    = require('gulp');
-var plumber = require('gulp-plumber');
-var webpack = require('webpack-stream');
-var rename  = require('gulp-rename');
-var uglify  = require('gulp-uglify');
-var eslint  = require('gulp-eslint');
+const gulp    = require('gulp');
+const plumber = require('gulp-plumber');
+const webpack = require('webpack-stream');
+const rename  = require('gulp-rename');
+const uglify  = require('gulp-uglify');
+const eslint  = require('gulp-eslint');
 
 // core includes
-var paths        = require('../paths');
-var errorHandler = require('../errorHandler');
+const paths        = require('../paths');
+const errorHandler = require('../errorHandler');
 
 /**
  * Defines a webpack configuration object. Do it once here to avoid having to replicate it in the compile and build
@@ -31,7 +31,11 @@ const WEBPACK_CONF = {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader'
-            }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json'
+            },
         ],
     },
     output:  {
@@ -45,11 +49,14 @@ const WEBPACK_CONF = {
  */
 gulp.task('js', function()
 {
+    let conf = WEBPACK_CONF;
+    conf.devtool = 'inline-source-map';
+
     return  gulp.src( paths.js.context )
                 .pipe(plumber({
                     errorHandler: errorHandler
                 }))
-                .pipe(webpack(WEBPACK_CONF))
+                .pipe(webpack(conf))
                 .pipe(gulp.dest( paths.js.output ));
 });
 
