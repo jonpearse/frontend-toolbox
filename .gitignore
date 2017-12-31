@@ -1,4 +1,9 @@
 node_modules
-assets/css/*
-assets/js/*
+assets/dist/*
+!assets/dist/.gitkeep
+assets/icons/*
+!assets/icons/.gitkeep
+assets/img/*
+!assets/img/.gitkeep
 Gemfile.lock
+yarn.lock

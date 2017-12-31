@@ -1,29 +1,43 @@
-var path = require('path');
-var root = path.resolve(__dirname+'/..');
-var fs   = require('fs');
-
-// load local file if there’s one to load
-var localFile  = path.resolve('./paths.js');
-var localPaths = (fs.existsSync(localFile)) ? require(localFile) : {};
+const ROOT   = require('path').resolve(`${__dirname}/..`);
+const ASSETS = ROOT + '/assets';
+const OUTPUT = ROOT + '/assets/dist';
 
 // output
-module.exports = require('deep-assign')({
-    root: root,
+module.exports = {
+    root:   ROOT,
+    build:  OUTPUT,
 
     sass: {
-        watch:   root+'/assets/scss/**/*.scss',
-        source: [root+'/assets/scss/*.scss', '!'+root+'/scss/_*.scss'],
-        output:  root+'/assets/css'
+        watch:   `${ASSETS}/scss/**/*.scss`,
+        source: [ `${ASSETS}/scss/*.scss`, `!${ASSETS}/scss/_*.scss` ],
+        output:  OUTPUT,
 
     },
 
     js: {
-        watch:   root+'/assets/source/**/*.js',
-        context: root+'/assets/source',
+        watch:   `${ASSETS}/js/**/*.js`,
+        context: `${ASSETS}/js`,
         compile: {
-            app: 'assets/source/app.js'
+            app: `${ASSETS}/js/app.js`
         },
-        output: root+'/assets/js'
-    }
+        output: OUTPUT
+    },
 
-}, localPaths);
+    images: {
+        watch:  `${ASSETS}/img/**/*`,
+        source: `${ASSETS}/img/**/*.*`,
+        output: OUTPUT
+    },
+
+    svg: {
+        watch:  `${ASSETS}/icons/*.svg`,
+        source: `${ASSETS}/icons/*.svg`,
+        output: OUTPUT
+    },
+
+    fonts: {
+        watch:  `${ASSETS}/fonts/**/*`,
+        source: `${ASSETS}/fonts/**/*.*`,
+        output: OUTPUT
+    }
+};

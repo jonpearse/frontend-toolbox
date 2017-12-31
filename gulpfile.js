@@ -5,27 +5,165 @@
 // ==========================================================================
 
 // gulp
-var gulp   = require('gulp');
+const gulp     = require('gulp');
+const rev      = require('gulp-rev');
+const revdel   = require('gulp-rev-delete-original');
+const del      = require('del');
+const seq      = require('run-sequence');
+const override = require('gulp-rev-css-url')
+
+// submodules
+const modules = require('require-dir')('./gulp/tasks');
 
 // ==========================================================================
 // # PATHS
 // ==========================================================================
-
-var paths = require('./gulp/paths');
+const paths = require('./gulp/paths');
 
 // ==========================================================================
 // # TASKS
 // ==========================================================================
 
-// include submodules
-require('require-dir')('./gulp/tasks');
+// # INIT
+// ==========================================================================
+gulp.task('init', function(cb)
+{
+    forModules('init', runTasks, cb);
+});
 
 // # WATCH
 // ==========================================================================
 gulp.task('watch', function()
 {
-    gulp.watch([paths.sass.watch],  ['sass-watch']);
-    gulp.watch([paths.js.watch  ],  ['js-watch']);
+    forModules('watch', function(oWatchDefinition)
+    {
+        gulp.watch(oWatchDefinition.files, oWatchDefinition.tasks);
+        return true;
+    });
 });
 
-gulp.task('default', ['watch']);
+// # LINT
+// ==========================================================================
+gulp.task('lint', function(fCb)
+{
+    forModules('lint', runTasks, fCb);
+});
+
+// # BUILD
+// ==========================================================================
+gulp.task('build', [ 'clean' ], function(fCb)
+{
+    // 0. get some revision paths
+    var aRevPaths = [ paths.build + '/*' ];
+
+    // 1. add any exclusions from each module
+    forModules('noRev', function(aExclude)
+    {
+        aExclude.forEach(function(sX)
+        {
+            aRevPaths.push('!' + paths.build + '/' + sX);
+        });
+
+        return true;
+    });
+
+    // 2. build everything
+    forModules('build', runTasks, function()
+    {
+        gulp.src(aRevPaths)
+            .pipe( rev() )
+            .pipe( revdel() )
+            .pipe( override() )
+            .pipe( gulp.dest( paths.build ))
+            .pipe( rev.manifest({
+                path: 'manifest.json',
+                merge: true
+            }))
+            .pipe( gulp.dest(paths.build))
+            .on('end', fCb);
+    });
+});
+
+// # CLEAN
+// ==========================================================================
+gulp.task('clean', function()
+{
+    return del.sync([
+        paths.build + '/*'
+    ]);
+})
+
+// # DEFAULT
+// ==========================================================================
+gulp.task('default', [ 'clean', 'init', 'watch' ]);
+
+// # QUICKSTART FUNCTION
+// ==========================================================================
+gulp.task('quick', [ 'watch' ]);
+
+
+// ==========================================================================
+// # UTILITY FUNCTIONS
+// ==========================================================================
+/**
+ * Utility function that iterates through included modules and returns the specified property for each.
+ *
+ * @param   sHook       the hook/property to return
+ * @param   fnCallback  a callback function, into which the property’s value is passed
+ * @param   fnComplete  function called when the whole thing has finished
+ */
+function forModules(sHook, fnCallback, fnComplete)
+{
+    // prepare callback hook
+    var iToRun = 0;
+    var bWaiting = false;
+    function fnCheckComplete()
+    {
+        // decrement our counter
+        iToRun--;
+
+        // if we’re waiting and everything is done…
+        if (bWaiting && (iToRun <= 0) && (fnComplete !== undefined))
+        {
+            fnComplete();
+        }
+    }
+
+    // run everything
+    Object.keys(modules).forEach(function(sModule)
+    {
+        // a. get the module
+        var oModule = modules[sModule];
+
+        // b. do we have a hook
+        if (oModule[sHook] !== undefined)
+        {
+            iToRun++;
+
+            if (!fnCallback(oModule[sHook], fnCheckComplete))
+            {
+                bWaiting = true;
+            }
+        }
+    });
+
+    // if we’re not waiting for anything
+    if (!bWaiting)
+    {
+        if (fnComplete !== undefined)
+        {
+            fnComplete();
+        }
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Runs an array of gulp tasks
+ */
+function runTasks(aTasks, fnCallback)
+{
+    seq(aTasks, fnCallback);
+    return false;
+}

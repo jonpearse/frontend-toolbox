@@ -2,7 +2,6 @@
 /// JavaScript
 @mixin bootstrap-breakpoints($pseudo: 'before')
 {
-
     &::#{$pseudo} {
         position:   absolute;
         visibility: hidden;
@@ -10,6 +9,8 @@
 
         height: 0;
         width:  0;
+
+        font-family: "#{$mq-breakpoints}";
 
         @each $break, $dim in $mq-breakpoints
         {
