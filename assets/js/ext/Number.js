@@ -14,6 +14,6 @@ module.exports = (function()
          * @param {mixed} value - the value to check.
          * @return {boolean} true if the passed value is NaN, false otherwise.
          */
-        Number.prototype.isNaN = value => (typeof value === 'number') && isNaN(value);
+        Number.prototype.isNaN = value => ((typeof value === 'number') && isNaN(value));
     }
 }());

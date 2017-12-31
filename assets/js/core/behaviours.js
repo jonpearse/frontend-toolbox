@@ -99,8 +99,15 @@ function bindBehaviours(elBindAt = document)
             console.debug('Options:', oOptions);
             console.groupEnd();
 
-            // d. fire the event and store it
-            elNode.boundBehaviours[sBehaviour] = oBehaviour.init.call(elNode, oOptions);
+            // d. fire the behaviour and store it
+            try
+            {
+                elNode.boundBehaviours[sBehaviour] = oBehaviour.init.call(elNode, oOptions);
+            }
+            catch (ex)
+            {
+                console.error(ex);
+            }
         });
     });
 }
