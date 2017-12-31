@@ -5,19 +5,20 @@
 // ==========================================================================
 
 // gulp
-var gulp   = require('gulp');
-var rev    = require('gulp-rev');
-var revdel = require('gulp-rev-delete-original');
-var del    = require('del');
-var seq    = require('run-sequence');
+const gulp     = require('gulp');
+const rev      = require('gulp-rev');
+const revdel   = require('gulp-rev-delete-original');
+const del      = require('del');
+const seq      = require('run-sequence');
+const override = require('gulp-rev-css-url')
 
 // submodules
-var modules = require('require-dir')('./gulp/tasks');
+const modules = require('require-dir')('./gulp/tasks');
 
 // ==========================================================================
 // # PATHS
 // ==========================================================================
-var paths = require('./gulp/paths');
+const paths = require('./gulp/paths');
 
 // ==========================================================================
 // # TASKS
@@ -72,6 +73,7 @@ gulp.task('build', [ 'clean' ], function(fCb)
         gulp.src(aRevPaths)
             .pipe( rev() )
             .pipe( revdel() )
+            .pipe( override() )
             .pipe( gulp.dest( paths.build ))
             .pipe( rev.manifest({
                 path: 'manifest.json',
@@ -87,13 +89,17 @@ gulp.task('build', [ 'clean' ], function(fCb)
 gulp.task('clean', function()
 {
     return del.sync([
-        paths.build + '/*.*',
+        paths.build + '/*'
     ]);
 })
 
 // # DEFAULT
 // ==========================================================================
-gulp.task('default', [ 'init', 'watch' ]);
+gulp.task('default', [ 'clean', 'init', 'watch' ]);
+
+// # QUICKSTART FUNCTION
+// ==========================================================================
+gulp.task('quick', [ 'watch' ]);
 
 
 // ==========================================================================
