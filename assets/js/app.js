@@ -1,12 +1,13 @@
 // include vendor scripts
 // require('vendor/scriptname');
 
-// Polyfill promises (but only if we’re supporting IE11)
+// Uncomment these if you’re supporting IE11
+// require('ext/CustomEvent');
+// require('ext/Element');
+// require('ext/Object');
 // require('promise-polyfill');
 
 // Extend things
-require('ext/CustomEvent');
-require('ext/Element');
 require('ext/NodeList');
 require('ext/Number');
 
